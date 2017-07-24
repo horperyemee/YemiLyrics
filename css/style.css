@@ -1,0 +1,263 @@
+.body,html{
+	font-family: myriad pro !important;
+
+}
+.bg_home{
+	background-image: url(../images/bg_home.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+
+}
+.header{
+	background-color: #cc3333;
+	height: 60px;
+	padding-top: 10px;
+	border-bottom: 3px solid #ffffff;
+}
+.menu ul{
+	margin-top: -11px;
+	background-color: #cc3333;
+}
+.menu li a{
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: lighter;
+}
+.menu li a:hover{
+	font-weight: bolder;
+	/*color: #cc3333;*/
+	background-color: transparent !important;
+}
+.text{
+	color: #ffffff;
+}
+.text_light{
+	font-weight: lighter;
+}
+.text_bold{
+	font-weight: bold;
+}
+.text_bolder{
+	font-weight: bolder;
+}
+.Hd_text{
+	padding-top: 30px;
+}
+.big_L{
+	font-size: 100px;
+	margin-bottom: 0px;
+}
+.small_L{
+	margin-top: 0px;
+	font-size: 40px;
+}
+.no_pad-btm,.no_margin-btm{
+	margin-bottom:0px;
+	padding-bottom: 0px; 
+}
+.searchBox{
+	height: 48px !important;
+	border: 3px solid #cc3333 !important;
+}
+.btn_srch{
+	background-color: #cc3333;
+	height: 48px !important;
+	width: 70px !important;
+	border: 3px solid #cc3333 !important;
+}
+.icon_srch{
+	font-size: 25px !important;
+	color: #ffffff;
+}
+.content{
+	padding-top: 20px;
+	padding-bottom: 115px;
+}
+.pageBttm{
+	background-color: #cc3333;
+	border-top: 3px solid #ffffff;
+	/*height: 250px;*/
+}
+.pad_img{
+	padding-top: 25px;
+}
+.img-nail{
+	border-radius: 3px;
+	border: 1px solid #ffffff;
+}
+.footer{
+	margin-top:40px; 
+	/*background-color: #663333;
+	opacity: 0.4;*/
+}
+.color {
+	background-color: #ffffff !important;
+	color: #ffffff !important;
+}
+
+/*Top Lyrics*/
+
+.no-pad-top{
+	margin-top: -48px;
+}
+.top_main{
+	background-color: #ffffff;
+	color: #;
+	box-shadow: 3px 3px 10px black;
+	border-radius: 6px;
+	padding-right: 0px !important;
+	/*padding-left: 10px !important;*/
+
+}
+
+.theader{
+	background-color: #cc3333;
+	width: 100%;
+	/*height: 30px;*/
+	margin-bottom: 15px !important;
+}
+.textheader{
+	color: #ffffff !important;
+	font-size: 20px !important;
+}
+.text_red{
+	color: #cc3333;
+	font-weight: bolder;
+	font-size: 17px;
+}
+.textred{
+	color: #cc3333;
+	font-size: 17px;
+}
+	/* sidebar 1 */
+
+
+
+.sideBar1{
+	background-color: #ffffff;
+	color: #;
+	box-shadow: 3px 3px 10px black;
+	border-radius: 6px;
+}
+.side1{
+	margin-top: -5px;
+	margin-bottom: -5px;
+}
+.img-size{
+	width: 40px;
+	height: 40px;
+	padding:5px;
+	margin: 0px;
+}
+.h3_top{
+	background-color: #cc3333;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	color: #ffffff;
+}
+.h-3{
+	font-size: 29px;
+	padding-top: 5px;
+}
+.m_gerne ol{
+	padding-top: 10px;
+	color: #cc3333;
+	font-size: 20px;
+}
+.m_gerne li a{
+	color: #cc3333;
+	font-size: 20px;
+	text-decoration: none;
+}
+.m_gerne li a:hover{
+	color: grey;
+}
+.m_gerne p{
+	text-align: right;
+}
+.m-anc{
+	padding-right: 6px; 
+	font-size: 18px;
+	color: #000000;
+}
+.m-anc:hover{
+	color: #cc3333;
+	text-decoration: none;
+}
+	/* Sidebar 2*/
+.sideBar2{
+	background-color: #ffffff;
+	border-radius: 6px;
+	box-shadow: 3px 3px 10px black;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+.searchTop{
+	height: 35px !important;
+	border: 2px solid #cc3333 !important;
+	
+}
+.btn-top{
+	background-color: #cc3333;
+	height: 35px !important;
+	width: 50px !important;
+	border: 3px solid #cc3333 !important;
+}
+.icon_top{
+	font-size: 15px !important;
+	color: #ffffff;
+}
+.socialGrp{
+	font-size: 17px;
+}
+.social{
+	padding-top: 20px;
+	text-align: center;
+}
+.social-circle{
+	color: #cc3333;
+	opacity: 0.4;
+}
+.social-icon:hover{
+	color: grey;
+	
+}
+.social-icon{
+	color: #cc3333;
+}
+/* Sign-up Page*/
+
+.sign-up{
+	background-image: url(../images/img_1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top;
+	color: #ffffff;
+}
+.formBodyIn{
+	width: 70% !important; 
+	margin-bottom: 215px;
+	background-color: white;
+	border-top: 6px solid #cc3333;
+	box-shadow: 3px 3px 50px black;
+}
+.formBody{
+	width: 70% !important; 
+	margin-bottom: 50px;
+	background-color: white;
+	border-top: 6px solid #cc3333;
+	box-shadow: 3px 3px 50px black;
+}
+.textRed{
+	color: #cc3333 !important;
+}
+
+
+/* Blog Page*/
+.pad-blog{
+	padding-bottom: 20px;
+}
+.top{
+	padding-top: 5px;
+}

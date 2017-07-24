@@ -1,0 +1,43 @@
+body,html{
+	font-family: myriad pro !important;
+}
+
+.fixed{
+	position: fixed;
+}
+/*dashboard*/
+.dashBoard{
+	margin-top: -48px;
+}
+.black{
+	background-color: black;
+	height: 30px;
+}
+.pad_body{
+	margin-top: -15px;
+}
+.sidebar1{
+	background-color: black;
+	position: fixed;
+	background-position: fixed;
+}
+.black_side2{
+	background-color: white;
+	position: fixed;
+	box-shadow: 3px 3px 10px black;
+}
+.dash-text{
+	padding-top: 0px;
+} 
+.dash-text a{
+	color: #cc6666;
+	font-size: 17px;
+	text-decoration: none;
+}
+.dash-text a:hover{
+	text-decoration: none;
+}
+.topSection{
+	background-color: black;
+	color: #fff;
+}

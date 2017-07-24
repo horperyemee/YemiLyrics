@@ -1,18 +1,44 @@
-<?php session_start();
+<?php 
+	
 	require 'config/config.php';
 
+/** Connecting to the database */
 	$db = new db(); 
 	$db = $db->connect(); 
 
-	$sql = 'SELECT * FROM blog_post;';
+	if(isset($_POST['Reg_btn']))
+		{
+			$user = $_POST['usr_name'];
+			$psd = $_POST['pass_user'];
 
-	$stmt = $db->prepare($sql);
+			$sql = "SELECT username, password FROM user WHERE username = :user AND password = :pswd;";
+
+			$stmt = $db->prepare($sql);
+
+			$stmt->bindParam('user', $user);
+			$stmt->bindParam('pswd', $psd);
+
+			$stmt->execute();
+
+			$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+				
+			if(!$result)
+			{
+				echo "Username or Password incorrect";
+			}
+			else
+			{
+				foreach ($result as $row) {
+					$_SESSION['admin'] = $row->username;
+				}
+				
+				echo "<script>window.location.href = 'index.php';</script>";
+			}
+
+			$db = null;
+		}
 	
-	$result = $stmt->execute();
-
-	$db = null;
-
-
 
 ?> 
 
@@ -26,7 +52,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Title -->
-	<title>YemiLyrics | Home </title>
+	<title>YemiLyrics | Sign in </title>
 
 	<!-- link of the stylesheet for this project -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -38,7 +64,7 @@
 </head>
 
 <!-- BODY starts Here.... -->
-<body class="bg_home">
+<body class="sign-up">
 
 	<div class="container-fluid">
 
@@ -62,10 +88,11 @@
 			        <div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li><a href="Top-lyrics.php">Top Lyrics</a></li>
-							<li><a href="sign-in.php">Contribute</a></li>
+							<li><a href="Contribute.php">Contribute</a></li>
 							<li><a href="Blog.php">Yemi's Corner</a></li>
 							<li><a href="sign-up.php">Sign up</a></li>
-							<li><a href="sign-in.php">Sign in</a></li>						
+
+							<li><a href="Sign-in.php">Sign in</a></li>						
 						</ul>
 					</div>
 				</nav>
@@ -73,28 +100,49 @@
 			</div>
 
 		</div>
+		</div>
 	<!-- Main Body Start HERE.... -->
 
-		<div class="container content" align="center">
-				<div class="Hd_text">
-					<h1 class="text big_L"><strong>WELCOME</strong></h1>
-					<h1 class="text small_L"><b>TO THE HOME OF LYRICS<b></h1>
-				</div>
-			<form method="post" action="">
+			<div class="container formBodyIn">
+				<h1 class="textRed">Sign in / Login</h1>
+				<form method="post" >
 
-				<div class="input-group ">
-			      	<input type="text" class="form-control searchBox" placeholder="search for any song lyrics..." name="">
-			      	<div class="input-group-btn">
-			        <button class="btn btn_srch " type="submit"><i class="fa fa-search icon_srch"></i></button>
-			      	</div>
-			    </div>
+					<div class="form-group">
+						<label class="textRed">Username</label>
+						<input type="text" name="usr_name" class="form-control" required="">
+					</div>
+					
+					<div class="form-group">
+						<label class="textRed">Password</label>
+						<input type="password" name="pass_user" class="form-control" required="">
+					</div>
+					
+					<div class="form-group">
+						<button class="form-control btn btn-danger" name="Reg_btn">Submit</button >
+					</div>
 
-			</form>
+					
+					<div class="row">
+						<div class="col-md-4" style="color:#cc3333;">
+							Don't have an account | <a href="sign-up.php">Sign up / Register</a>
+						</div> 
+						<div class="col-md-5"></div>
+						<div class="col-md-3">
+							<a href="#"><i>Forgot password ?</i></a>
+						</div>
+						
+					</div>
+					<div>&nbsp;</div>
+						<!--<button type="button" name="btn-submit"  class="btn btn-danger">Submit</button>-->
+					
+					
+				</form>
+			</div>		
 
 
 
-		</div>
-	</div>
+		
+	
 	<!-- Lower Part of the Body Start HERE.... -->
 
 		<div class="pageBttm">
@@ -108,28 +156,11 @@
 					</div>
 					<div class="col-md-8 text-center">
 
-						<div class="row">
-							<div class="col-md-9">
-								<!-- Blog Post-->
-							
-								<h1 class="text text_bold no_pad-btm ">#DoYouKnow?</h1>
-									<small class="text">written by Yemi brahim</small>
-									<p>&nbsp;</p>
-								<p class="text text_light">	
-									
-									
-									Lorem Ipsum is simply dummy text of the printing and typesetting
-									industry. Lorem Ipsum has been the industry's standard dummy text
-									ever since the 1500s, when an unknown printer took a galley of type 
-									and scrambled it to make a type specimen book. It has survived not only 
-									five centuries, 
-								</p>
-							
-							</div>
-							<div class="col-md-3 pad_img">
-								<img src="images/img_2.jpg" class="img-responsive img-nail">
-							</div>
-						</div>
+					<!-- Blog Post-->
+					
+					<p>&nbsp;</p>
+					
+
 
 					</div>
 					<div class="col-md-2">
