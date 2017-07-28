@@ -1,3 +1,24 @@
+<?php 
+	require 'config/config.php';
+
+	$db = new db(); 
+	$db = $db->connect(); 
+
+	$sql = 'SELECT * FROM blog_post;';
+
+	$stmt = $db->prepare($sql);
+	
+	$stmt->execute();
+
+	$final = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+
+
+	$db = null;
+
+
+
+?> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +29,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Title -->
-	<title>YemiLyrics | Top Lyrics </title>
+	<title>Yemi's corner | YemiLyrics </title>
  
 	<!-- link of the stylesheet for this project -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -64,9 +85,73 @@
 				<div class="col-md-9">
 
 					<div class="container-fluid top-main">
-						
-						
-						
+
+						<div class="row">
+							<div class="col-md-4">
+
+								<div class="blog_post">
+									<h3>My first Blog Post</h3>
+									<hr>
+									<div>
+										<img src="images/img_2.jpg" class="img-responsive">
+									</div>
+									<hr>
+									<p></p>
+									<hr>
+								</div>
+								
+							</div>
+							<div class="col-md-4">
+
+							<?php foreach ($final as $value) { ?>
+									
+
+								<div class="blog_post">
+									<div class="container h_ref" align="center">
+										<a href="post.php?pid=<?= $value->id; ?>"><h3><b><?= $value->post_title;?></b></h3></a>
+									</div>
+									
+									<div>
+										<img src="<?php echo $value->post_img;?>" alt="Post Image" class="img-responsive">
+									</div>
+									
+									<div class="container">
+
+										<p style="font-size: 15px;"><?php echo substr($value->post_content, 0, 320); ?>
+										...</p>
+
+										<div align="right"><small><a href="#">by <?= $value->post_creator?></a></small></div>
+
+										<div><a href="post.php?pid=<?= $value->id; ?>" class="read_more">Continue reading </a></div>
+									</div>
+
+									<div class="blog_btn">
+										<a href="post.php?pid=<?= $value->id; ?>"><i class="fa fa-clock-o"></i>&nbsp;<?= $value->date_created?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="#"><i class="fa fa-comments"></i></a>
+									</div>
+									
+								</div>
+								<p></p>
+								<?php } ?>
+
+								
+							</div>
+							<div class="col-md-4">
+								
+								<div class="blog_post">
+									<h3>My third blog post</h3>
+									<hr>
+									<div>
+										<img src="images/img_2.jpg" class="img-responsive">
+									</div>
+									<hr>
+									<p></p>
+									<hr>
+								</div>
+
+							</div>
+						</div>
+
 
 
 					</div>
@@ -88,19 +173,59 @@
 								</div>
 
 								<div class="row top">
-									<div class="col-md-1" align="left"> 1. </div>
+									<div class="col-md-1" align="left"></div>
 									<div class="col-md-6">
 										<a href="#">My love for singing</a>
 									</div>
-									<div class="col-md-4"><img src="images/img_2.jpg" class="img-responsive "></div>
-									<div class="col-md-1"></div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
 								</div>
-
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
 						</div>
 						
 
 					</section>	
-
+					<p>&nbsp;</p>
 					<!--Lower Section of the side bar-->
 					<section class="sideBar2">
 						<div class="container-fluid">

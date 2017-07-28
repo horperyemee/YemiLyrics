@@ -4,11 +4,13 @@
 	$db = new db(); 
 	$db = $db->connect(); 
 
-	$sql = 'SELECT * FROM blog_post;';
+	$sql = 'SELECT * FROM blog_post ORDER BY id DESC LIMIT 1;';
 
 	$stmt = $db->prepare($sql);
 	
-	$result = $stmt->execute();
+	$stmt->execute();
+	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
 
 	$db = null;
 
@@ -111,24 +113,29 @@
 						<div class="row">
 							<div class="col-md-9">
 								<!-- Blog Post-->
+							<?php foreach ($result as $row) {?>
+								
 							
-								<h1 class="text text_bold no_pad-btm ">#DoYouKnow?</h1>
-									<small class="text">written by Yemi brahim</small>
+								<h1 class="text text_bold no_pad-btm "><?= $row->post_title;?><!--#DoYouKnow?--></h1>
+									<small class="readmore">written by <?= $row->post_creator;?><!--Yemi brahim--></small>
 									<p>&nbsp;</p>
 								<p class="text text_light">	
 									
-									
-									Lorem Ipsum is simply dummy text of the printing and typesetting
+									<?php echo substr($row->post_content, 0, 320); ?>....
+									<!--Lorem Ipsum is simply dummy text of the printing and typesetting
 									industry. Lorem Ipsum has been the industry's standard dummy text
 									ever since the 1500s, when an unknown printer took a galley of type 
 									and scrambled it to make a type specimen book. It has survived not only 
-									five centuries, 
+									five centuries,--> 
+									<br>
+									<a href="post.php?pid=<?= $row->id; ?>" class="readmore">Continue reading </a>
 								</p>
-							
+									
 							</div>
 							<div class="col-md-3 pad_img">
-								<img src="images/img_2.jpg" class="img-responsive img-nail">
+								<img src="<?= $row->post_img; ?>" class="img-responsive img-thumbnail" width="" height="500px">
 							</div>
+							<?php } ?>
 						</div>
 
 					</div>
@@ -140,9 +147,18 @@
 
 			</div>
 			<!-- Footer Here-->
-			<div class="footer text-center">
+			<div class="footer container-fluid">
+				<div class="row">
+
+					<div class="col-md-4">
+						<p class="text text_light">&copy; 2017 YemiLyrics.com</p>
+					</div>
+					<div class="col-md-6"></div>
+					<div class="col-md-2">
+						<a href="#">Made with <i class="glyphicon glyphicon-heart text"></i> by YemiBrahim</a>
+					</div>
+				</div>
 				
-			<a href="#"><p class="text text_light">&copy; 2017 YemiLyrics.com</p></a>
 
 
 			</div>

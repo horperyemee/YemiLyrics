@@ -2,6 +2,14 @@
 	font-family: myriad pro !important;
 
 }
+.readmore{
+	color: black;
+	font-weight: bold;
+}
+.readmore:hover{
+	color: grey;
+	text-decoration: none;
+}
 .bg_home{
 	background-image: url(../images/bg_home.jpg);
 	background-size: cover;
@@ -260,4 +268,106 @@
 }
 .top{
 	padding-top: 5px;
+}
+.background{
+	background-color: #ffffff;
+	color: #;
+	box-shadow: 3px 3px 10px black;
+	/*border-radius: 6px;
+	padding-right: 0px !important;*/
+}
+	/* Blog post */
+
+.blog_post{
+	background-color: #ffffff;
+	box-shadow: 3px 3px 10px black;
+	border-radius: 5px;
+}
+.h_ref a{
+	color: #000;
+	font-family: myriad pro;
+}
+.h_ref a:hover{
+	text-decoration: none;
+	color: #cc3333;
+}
+.b_cont{
+	font-size: 10px;
+}
+.read_more{
+	color: #cc3333;
+	font-family: myriad pro;
+	font-weight: bold;
+}
+.read_more:hover{
+	color: grey;
+	text-decoration: none;
+}
+.blog_btn{
+	background-color: black;
+	border-top: 2px solid #cc3333;
+	padding: 6px; 
+	font-family: myriad pro;
+}
+.blog_btn a{
+	font-size: 15px;
+	color: #cc3333;
+}
+.blog_btn a:hover{
+	color: #ffffff;
+	text-decoration: none;
+}
+/* Contribute Page*/
+.img_con{
+	background-image: url(../images/img_4.jpg);
+	height: 120px;
+	border-bottom: 2px solid #000;
+}
+.fontSmall{
+	font-size: 14px !important;
+	text-align: center;
+}
+.fontBig{
+	padding-top: 30px;
+	font-size: 43px;
+}
+.nopad{
+	margin-top: -20px;
+}
+.bg_red{
+	background-color: #cc3333;
+}
+/*post page*/
+.pad_post{
+	margin-top: -20px;
+}
+.h_2{
+	font-size: 50px;
+}
+.socialGrp_post{
+	font-size: 17px;
+
+}
+.socialGrp_post:hover{
+	opacity: 0.7;
+}
+.social{
+	padding-top: 20px;
+	text-align: center;
+}
+.social_post_t{
+	color: #00aced;
+}
+.social_post_f{
+	color: #3B5998;
+}
+.social_post_g{
+	color:  #d34836;
+}
+.post_icon:hover{
+	color: grey;
+	
+}
+.post_icon{
+	color: #ffffff;
 }

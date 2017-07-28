@@ -1,40 +1,23 @@
-<?php
+<?php 
+	if(isset($_GET['pid'])) {
+	$pid = $_GET['pid'];
+
 	require 'config/config.php';
+	$con = new db();
+	$db = $con->connect();
 
-/** Connecting to the database */
-	$db = new db(); 
-	$db = $db->connect(); 
-
-	$sql = 'SELECT * FROM ;';
+	$sql = "SELECT * FROM blog_post WHERE id = :id";
 
 	$stmt = $db->prepare($sql);
 
-	$stmt->execute(); 
+	$stmt->bindParam('id', $pid);
+	$stmt->execute();
+
 	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-	if (isset($_POST['btnCon'])) {
-		
-		$title = $_POST['title'];
-		$gerne = $_POST['gerne'];
-		$artist = $_POST['artist'];
-		$content = $_POST['content'];
-
-		$sql = 'INSERT INTO user_contribute (lyric_title, lyric_gerne, lyric_artist, lyric_content) VALUES (:title, :gerne, :artist, :content);';
-
-		$stmt = $db->prepare($sql);
-
-		$stmt = bindParam('title', $title);
-		$stmt = bindParam('gerne', $gerne);
-		$stmt = bindParam('artist', $artist);
-		$stmt = bindParam('content', $content);
-		
-		$result = $stmt->execute();
-	}
-?>
+}
 
 
-
-
+?> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +28,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Title -->
-	<title>YemiLyrics | Top Lyrics </title>
+	<title>Yemi's corner | YemiLyrics </title>
  
 	<!-- link of the stylesheet for this project -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -97,72 +80,55 @@
 
 		<div class="container-fluid">
 
-			<div class="row ">
-				
-				<div class="col-md-9 nopad">
+			<div class="row">
+				<div class="col-md-9">
 
-					<div class="background">
-						
-					
-					<div class="img_con" align="center">
-						<h2 class="text_bold text fontBig">Contribute to the community</h2>
-					</div>
-						<div class="row">
-						<div class="col-md-1"></div>
-						<div class="col-md-10">
-							
-							<p class="textred fontSmall">Lorem Ipsum is simply dummy text of the printing and typesetting
-								industry. Lorem Ipsum has been the industry's standard dummy text
-								ever since the 1500s, when an unknown printer took a galley of type 
-								and scrambled it to make a type specimen book. It has survived not only 
-								five centuries, 
-							</p>
-						</div>
-							<div class="col-md-1"></div>
-						</div>	
-						
+				<?php foreach ($result as $value) { ?>
+					<div class="container top_main">
 
-					<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
-							<form method="post">
-							<div class="form-group">
-								<label for="title" class="textred">Music title:</label>
-								<input type="text" name="title" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="gerne" class="textred">Music gerne:</label>
-								<input type="text" name="gerne" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="artist" class="textred">Artist name:</label>
-								<input type="text" name="artist" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="content" class="textred">Music lyrics:</label>
-								<textarea name="content" class="form-control"></textarea>
-							</div>
-							<div class="form-group" align="center">
-								<button class="btn btn-danger" name="btnCon">Submit</button>
-							</div>
-						</form>
-						</div>
 						
-						<div class="col-md-2"></div>
-					</div>
-					</div>
+							<div class="row">
+								<div class="col-md-12" align="center">
+									<h2 class="h_2"><?= $value->post_title;?></h2>
+									<div align="center"><small><a href="#">by <?= $value->post_creator?></a></small></div>
+								</div>
+							</div>
+							<div>
+								<img src="<?= $value->post_img;?>" class="img-responsive">
+							</div>
+							<div class="container">
+								<?= $value->post_content;?>
+							</div>
 					
+						
+							<hr>
+						<div class="container">
+							<p>Share this:
+
+							<div class="">
+						    	<span class="fa-stack socialGrp_post">
+								  <i class="fa fa-circle fa-stack-2x social_post_t"></i>
+								  <a href="" class="post_icon"><i class="fa fa-twitter fa-stack-1x "></i></a>
+								</span>
+								<span class="fa-stack socialGrp_post">
+								  <i class="fa fa-circle fa-stack-2x social_post_f"></i>
+								  <a href="" class="post_icon"><i class="fa fa-facebook fa-stack-1x "></i></a>
+								</span>
+								<span class="fa-stack socialGrp_post">
+								  <i class="fa fa-circle fa-stack-2x social_post_g"></i>
+								  <a href="" class="post_icon"><i class="fa fa-google-plus fa-stack-1x "></i></a>
+								</span>
+								
+						    </div>
+						    </p>
+						    <p></p>
+						</div>
+
+					</div>
+				<?php }?>
+					
+
 				</div>
-					
-
-					
-
-				
-
-				
-				
-
-
 
 
 
@@ -170,60 +136,65 @@
 				<!-- Side Bar Sectcion-->
 				<div class="col-md-3">
 					<section class="sideBar1">
-						<div class="bg_red text-center">
-							<p class="text">Top Contributors</p>
-						</div>
-					<div class="container-fluid">
-						<div class="table-responsive">
-						
-						<table class="table-hover">
-							<tr>
-								<td>1.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>2.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>3.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>4.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>5.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>6.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>7.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>8.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>9.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>10.</td>
-								<td>John Jonas</td>
-							</tr>
-						</table><br>
-					</div>
-					</div>
-					
-						
-					</section>	
+						<div class="pad_post">
+							
+								<div class="h3_top">
+									<h3 class="h-3">Recent Blog Post</h3>
+								</div>
 
+								<div class="row top">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+								<hr>
+								<div class="row ">
+									<div class="col-md-1" align="left"></div>
+									<div class="col-md-6">
+										<a href="#">My love for singing</a>
+									</div>
+									<div class="col-md-3"><img src="images/img_2.jpg" class="img-responsive "></div>
+									<div class="col-md-2"></div>
+									
+								</div>
+						</div>
+						
+
+					</section>	
 					<p>&nbsp;</p>
 					<!--Lower Section of the side bar-->
 					<section class="sideBar2">

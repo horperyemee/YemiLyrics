@@ -4,7 +4,7 @@
 	$con = new db();
 	$dbcon = $con->Connect();
 
-
+	
 	
 	if(isset($_POST['save_btn'])){
 
@@ -14,13 +14,15 @@
 		$psd1 = $_POST['pass_user'];
 		$psd2 = $_POST['pass_rpt'];
 
-		
+
+				
 		if($psd1 != $psd2){
 
 			echo ('password do not match');
 		}
 		else{
 			
+
 
 			$sql = "INSERT INTO user (name, username, email, password, dated) VALUES (:name, :user, :email, :pass, :dated)";
 
@@ -37,8 +39,12 @@
 
 			if($result != null)
 			{
-				echo "<script>window.location.href = 'sign-in.php';</script>?";
-			}
+				
+					echo "<script>window.location.href = 'sign-in.php';</script>?";
+				}	
+
+			
+
 			else{
 				echo "Error creating the account. Please try again";
 			}
@@ -49,6 +55,22 @@
 		}
 
 	}
+
+	function CheckEmail()
+			{
+			     $email = $_POST['email'];
+			     $query = mysql_query("SELECT email FROM users WHERE email='" . $email . "'");
+			     $a = mysql_num_rows($query);
+			     if ((!filter_var($email, FILTER_VALIDATE_EMAIL)) OR ($a >= 1))
+			     {
+			         echo "Your email is not valid or already exists!";
+			         echo $a;
+			     }
+			     else
+			     {
+			         return true;      
+     			}
+			}
 ?> 
 
 <!DOCTYPE html>

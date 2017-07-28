@@ -6,7 +6,7 @@
 	$db = $db->connect(); // calling the function connect from class db
 
 /** Performing query operations to the database */
-	$sql = 'SELECT * FROM blog_post WHERE id = :id;'; // SQL string to fetch all items from table todo
+	$sql = 'SELECT * FROM user_contribute WHERE id = :id;'; // SQL string to fetch all items from table todo
 	$stmt = $db->prepare($sql); // Prepare the sql statement for execution
 
 	$stmt->bindParam(':id', $_GET['id']);

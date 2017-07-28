@@ -171,12 +171,21 @@
 
 			</div>
 			<!-- Footer Here-->
-			<div class="footer text-center">
+			<div class="footer container-fluid">
+				<div class="row">
+
+					<div class="col-md-4">
+						<p class="text text_light">&copy; 2017 YemiLyrics.com</p>
+					</div>
+					<div class="col-md-6"></div>
+					<div class="col-md-2">
+						<a href="#">Made with <i class="glyphicon glyphicon-heart text"></i> by YemiBrahim</a>
+					</div>
+				</div>
 				
-			<a href="#"><p class="text text_light">&copy; 2017 YemiLyrics.com</p></a>
 
 
-			</div>
+			</div> 
 
 		</div>
 

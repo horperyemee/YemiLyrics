@@ -1,5 +1,5 @@
 <?php session_start();
-		
+
 	require '../config/config.php';
 	$db = new db(); 
 	$db = $db->connect(); 
@@ -11,12 +11,16 @@
 	$stmt->execute(); 
 	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-	
-	//checking for the post create button is clicked
 	if (isset($_POST['btnBlog'])) {
 			
+
+			$blog_dir = "../uploads/";
+			$blog_up = $blog_dir.$_FILES['blogImage']['name'];
+
+			move_uploaded_file($_FILES['blogImage']['tmp_name'], $blog_up);
+
 			$blog = $_POST['blogTitle'];
-			$blogImage = $_POST['blogImage'];
+			$blogImage = $blog_up;
 			$blogContent = $_POST['blogContent'];
 			
 
@@ -39,7 +43,7 @@
 			
 
 			if (!$final) {
-				echo "<script>alert('Problems creating the post, check your fields')</script>";
+				echo "<script>alert('Problems creating the post, check your fields');</script>";
 			}
 			else{
 				echo "<script>window.location.href = 'dashboard.php';</script>";
@@ -47,30 +51,19 @@
 				$sql = 'SELECT * FROM blog_post WHERE name=:name;';
 			}
 
+		}
 
+		if (isset($_POST['btnTop'])) {
 
-	}
+		$top_dir = "../uploads/";
+		$top_up = $top_dir. $_FILES['topImage']['name'];
 
-	if(isset($_GET['del_id']))
-	{
-	$id = $_GET['del_id'];
-
-	$sql = "DELETE FROM blog_post WHERE id=:id";
-		$stmt = $db->prepare($sql);
-
-		$stmt->bindParam(':id', $id);
-
-		$stmt->execute();
-
-		echo "<script> window.location.href = 'dashboard.php'; </script>";	
-	}
-
-	if (isset($_POST['btnTop'])) {
+		move_uploaded_file($_FILES['topImage']['tmp_name'], $top_up);
 		
 		$titleT = $_POST['topTitle'];
 		$artistT = $_POST['topArtist'];
 		$gerneT = $_POST['topGerne'];
-		$imgT = $_POST['topImage'];
+		$imgT = $top_up;
 
 		$sql = 'INSERT INTO toplyrics (songTitle, artist, gernes, image, yearRelease) VALUES (:title, :artist, :gerne, :image, :dated);';
 
@@ -87,7 +80,7 @@
 
 
 			if (!$result) {
-				echo "<script>alert('Problems creating the post, check your fields')</script>";
+				echo "<script>alert('Problems creating the post, check your fields');</script>";
 			}
 			else{
 				echo "<script>window.location.href = 'dashboard.php';</script>";
@@ -96,8 +89,41 @@
 
 	}
 
+	if (isset($_POST['btnLyric'])) {
+		
+		$titleL = $_POST['lyricTitle'];
+		$artistL = $_POST['lyricArtist'];
+		$gerneL = $_POST['lyricGerne'];
+		$contentL = $_POST['lyricContent'];
+
+		$sql = 'INSERT INTO song_lyrics (title_song, gerne, artist, content, year_release) VALUES (:title, :gerne,  :artist, :content, :dated);';
+
+		$dated = date('Y-m-d');
+		$stmt = $db->prepare($sql);
+
+
+		$stmt->bindParam('title', $titleL);
+		$stmt->bindParam('gerne', $gerneL);
+		$stmt->bindParam('artist', $artistL);
+		$stmt->bindParam('content', $contentL);
+		$stmt->bindParam('dated', $dated);
+
+		$result = $stmt->execute();
+
+
+		if (!$result) {
+				echo "<script>alert('Problems creating the post, check your fields')</script>";
+			}
+		else{
+				echo "<script>window.location.href = 'dashboard.php';</script>";
+			}
+
+
+	}
+
 	$db = null;
-?> 
+	
+	?> 
 
 <!DOCTYPE html>
 <html>
@@ -169,7 +195,7 @@
 								<li><a href="">Blog Post</a></li>
 								<li><a href="">Lyrics Post</a></li>
 								<li><a href="dashboard.php#topLyrics">Top Lyrics</a></li>
-								<li><a href="">Submitted Lyrics</a></li>
+								<li><a href="Submitted.php">Submitted Lyrics</a></li>
 							</ul>
 						</nav>
 						<div class="container">
@@ -196,7 +222,7 @@
 							<div class="col-md-12">
 
 							<!-- Blog Create input fields-->
-								<form method="post">
+								<form method="post" enctype="multipart/form-data">
 									<input type="text" name="blogTitle" placeholder="Title of post" class="form-control" required=""><br>
 									<input type="file" name="blogImage" placeholder="image files only" class="form-control" required=""><br>
 									<textarea name="blogContent" placeholder="Post Content" required="" class="form-control"></textarea><br>
@@ -207,43 +233,33 @@
 
 							</div>
 						</div>
-						<div class="table-responsive ">
+						
+						</section>
 
-							<!-- Blog Contents from Database -->
-							<table class="table table-hover">
-								<thead>
-									<tr class="danger">
-										<th>s/n</th>
-										<th>Title</th>
-										<th>Blog Content</th>
-										<th>Post Creator</th>
-										<th>Date</th>
-										<th>Edit and Delete</th>
-																		
-									</tr>
-								</thead>
-								<?php $i=1; foreach($result as $row) { ?>
-									<tr>
-										<td><?= $i++; ?></td>
-										<td><?= $row->name?></td>
-										<td><?= $row->username ?></td>
-										<td><?= $row->email?></td>
-										<td><?= $row->dated?></td>
-										<td>
-											<!-- Delete and edit options -->
-											<a id="upd_id" class="btn btn-success" href="edit.php">Edit</a>
-											<a class="btn btn-danger" href="del_id">Del</a>
-										</td>
-										
-									</tr>
-									<?php }?>
-							</table>
-						</div>
+						<hr style="border: 8px solid #cc3333;">
+					<section>
+						<h3>Lyrics Studio | Content</h3>
+
+							<form method="post">
+
+									<input type="text" name="lyricTitle" placeholder="Title of lyrics" class="form-control" required=""><br>
+									<input type="text" name="lyricArtist" placeholder="artist name" class="form-control" required=""><br>
+									<input type="text" name="lyricGerne" placeholder="Music gerne" class="form-control" required=""><br>
+									<textarea name="lyricContent" placeholder="Lyric Content" required="" class="form-control"></textarea><br>
+									<div class="form-group" align="center">
+										<button class="btn btn-danger" name="btnLyric">Create</button>
+									</div>
+
+							</form>
+
 
 						<!-- Top Lyrics input fields-->
-						<div class="topSection" id="topLyrics" align="center">
-								<h3 class="h-3">Top Lyrics Selection</h3>
-								<form method="post">
+						<div  id="topLyrics" align="center">
+								<div class="topSection">
+									<h3>Top Lyrics Selection</h3>
+								</div>
+								
+								<form method="post" enctype="multipart/form-data">
 									<input type="text" name="topTitle" placeholder="song title" class="form-control" required=""><br>
 									<input type="text" name="topArtist" placeholder="name of artist" class="form-control" required=""><br>
 									<input type="text" name="topGerne" placeholder="gerne type" class="form-control" required="" ><br>
@@ -273,13 +289,13 @@
 								
 							</tr>
 						</thead>
-						<?php $i=1; foreach($result as $row) { ?>
+						 <?php $i=1; foreach ($result as $row) { ?> 
 							<tr>
 								<td><?= $i++; ?></td>
-								<td><?= $row->name?></td>
-								<td><?= $row->username ?></td>
-								<td><?= $row->email?></td>
-								<td><?= $row->dated?></td>
+								<td><?= $row->name; ?></td>
+								<td><?= $row->username; ?></td>
+								<td><?= $row->email; ?></td>
+								<td><?= $row->dated; ?></td>
 							</tr>
 							<?php }?>
 					</table>
