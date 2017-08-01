@@ -1,11 +1,11 @@
-<?php
+<?php session_start();
 	require 'config/config.php';
 
 /** Connecting to the database */
 	$db = new db(); 
 	$db = $db->connect(); 
 
-	$sql = 'SELECT * FROM ;';
+	$sql = 'SELECT * FROM user_contribute ORDER BY id DESC LIMIT 10;';
 
 	$stmt = $db->prepare($sql);
 
@@ -14,15 +14,17 @@
 
 	if (isset($_POST['btnCon'])) {
 		
+		
 		$title = $_POST['title'];
 		$gerne = $_POST['gerne'];
 		$artist = $_POST['artist'];
 		$content = $_POST['content'];
 
-		$sql = 'INSERT INTO user_contribute (lyric_title, lyric_gerne, lyric_artist, lyric_content) VALUES (:title, :gerne, :artist, :content);';
+		$sql = 'INSERT INTO user_contribute (username, lyric_title, lyric_gerne, lyric_artist, lyric_content) VALUES (:user, :title, :gerne, :artist, :content);';
 
 		$stmt = $db->prepare($sql);
 
+		$stmt = bindParam('user',$_SESSION['admin']);
 		$stmt = bindParam('title', $title);
 		$stmt = bindParam('gerne', $gerne);
 		$stmt = bindParam('artist', $artist);
@@ -131,7 +133,7 @@
 								<input type="text" name="title" class="form-control">
 							</div>
 							<div class="form-group">
-								<label for="gerne" class="textred">Music gerne:</label>
+								<label for="gerne" class="textred">Music genre:</label>
 								<input type="text" name="gerne" class="form-control">
 							</div>
 							<div class="form-group">
@@ -177,46 +179,14 @@
 						<div class="table-responsive">
 						
 						<table class="table-hover">
+							<?php $i=1; foreach($result as $row) {?>
 							<tr>
-								<td>1.</td>
-								<td>John Jonas</td>
+								<td><?= $i++;?></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td><?= $row->name;?></td>
 							</tr>
-							<tr>
-								<td>2.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>3.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>4.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>5.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>6.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>7.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>8.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>9.</td>
-								<td>John Jonas</td>
-							</tr>
-							<tr>
-								<td>10.</td>
-								<td>John Jonas</td>
-							</tr>
+							<?php }?>
 						</table><br>
 					</div>
 					</div>
@@ -228,21 +198,23 @@
 					<!--Lower Section of the side bar-->
 					<section class="sideBar2">
 						<div class="container-fluid">
-							<div class="input-group ">
-						      	<input type="text" class="form-control searchTop" placeholder="search for any song lyrics..." name="">
-						      	<div class="input-group-btn">
-						        <button class="btn btn-top " type="submit"><i class="fa fa-search icon_top"></i></button>
-						      	</div>
-						    </div>
+							<form method="POST" action="search.php">
+								<div class="input-group ">
+							      	<input type="text" class="form-control searchTop" placeholder="search for any song lyrics..." name="searchBox">
+							      	<div class="input-group-btn">
+							        <button class="btn btn-top" name="searchBtn" type="submit"><i class="fa fa-search icon_top"></i></button>
+							      	</div>
+						    	</div>
+							</form>
 
 						    <div class="social">
 						    	<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
+								  <a href="https://twitter.com/YemeeLyrics" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
+								  <a href="https://www.facebook.com/YemeeLyrics/" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>

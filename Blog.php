@@ -89,16 +89,9 @@
 						<div class="row">
 							<div class="col-md-4">
 
-								<div class="blog_post">
-									<h3>My first Blog Post</h3>
-									<hr>
-									<div>
-										<img src="images/img_2.jpg" class="img-responsive">
-									</div>
-									<hr>
-									<p></p>
-									<hr>
-								</div>
+								
+							
+
 								
 							</div>
 							<div class="col-md-4">
@@ -108,11 +101,11 @@
 
 								<div class="blog_post">
 									<div class="container h_ref" align="center">
-										<a href="post.php?pid=<?= $value->id; ?>"><h3><b><?= $value->post_title;?></b></h3></a>
+										<a href="post.php?pid=<?= $value->id; ?>"><h2><b><?= $value->post_title;?></b></h2></a>
 									</div>
 									
-									<div>
-										<img src="<?php echo $value->post_img;?>" alt="Post Image" class="img-responsive">
+									<div >
+										<img src="<?php echo $value->post_img;?>" alt="Post Image" class="img_size img-responsive">
 									</div>
 									
 									<div class="container">
@@ -138,16 +131,8 @@
 							</div>
 							<div class="col-md-4">
 								
-								<div class="blog_post">
-									<h3>My third blog post</h3>
-									<hr>
-									<div>
-										<img src="images/img_2.jpg" class="img-responsive">
-									</div>
-									<hr>
-									<p></p>
-									<hr>
-								</div>
+								
+							
 
 							</div>
 						</div>
@@ -169,7 +154,7 @@
 						<div class="pad-blog">
 							
 								<div class="h3_top">
-									<h3 class="h-3">Recent Blog Post</h3>
+									<h3 class="h-3">Recent Blog Posts</h3>
 								</div>
 
 								<div class="row top">
@@ -239,11 +224,11 @@
 						    <div class="social">
 						    	<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
+								  <a href="https://twitter.com/YemeeLyrics" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
+								  <a href="https://www.facebook.com/YemeeLyrics/" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>

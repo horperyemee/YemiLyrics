@@ -178,21 +178,23 @@
 					<!--Lower Section of the side bar-->
 					<section class="sideBar2">
 						<div class="container-fluid">
-							<div class="input-group ">
-						      	<input type="text" class="form-control searchTop" placeholder="search for any song lyrics..." name="">
-						      	<div class="input-group-btn">
-						        <button class="btn btn-top " type="submit"><i class="fa fa-search icon_top"></i></button>
-						      	</div>
-						    </div>
+							<form method="POST" action="search.php">
+								<div class="input-group ">
+							      	<input type="text" class="form-control searchTop" placeholder="search for any song lyrics..." name="searchBox">
+							      	<div class="input-group-btn">
+							        <button class="btn btn-top" name="searchBtn" type="submit"><i class="fa fa-search icon_top"></i></button>
+							      	</div>
+						    	</div>
+							</form>
 
 						    <div class="social">
 						    	<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
+								  <a href="https://twitter.com/YemeeLyrics" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
+								  <a href="https://www.facebook.com/YemeeLyrics/" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>

@@ -5,7 +5,7 @@
 	$db = new db(); 
 	$db = $db->connect(); 
 
-	$sql = 'SELECT * FROM toplyrics;';
+	$sql = 'SELECT * FROM toplyrics LIMIT 20;';
 
 	$stmt = $db->prepare($sql);
 
@@ -85,7 +85,7 @@
 							<div class="col-md-1 textheader" align="center">s/n</div>
 							<div class="col-md-3 textheader" align="center">Song Title</div>
 							<div class="col-md-3 textheader" align="center">Artist</div>
-							<div class="col-md-2 textheader" align="center">Gerne</div>
+							<div class="col-md-2 textheader" align="center">Genre</div>
 							<div class="col-md-1 textheader"></div>
 							<div class="col-md-2 textheader" align="center">Year</div>
 							
@@ -97,7 +97,7 @@
 							<div class="col-md-3 textred" align="center"><a class="textRed" href="#"><?= $row->songTitle; ?></a></div>
 							<div class="col-md-3 textred" align="center"><a class="textRed" href="#"><?= $row->artist; ?></a></div>
 							<div class="col-md-2 textred" align="center"><a class="textRed" href="#"><?= $row->gernes; ?></a></div>
-							<div class="col-md-1 textred" align="center"><img src="images/img_1.jpg" class="img-responsive"></div>
+							<div class="col-md-1 textred" align="center"><img src="<?= $row->image;?>" class="img-responsive"></div>
 							<div class="col-md-2 textred" align="center"><?= $row->yearRelease; ?></div>
 							
 						</div>
@@ -119,42 +119,9 @@
 				<div class="col-md-3">
 					<section class="sideBar1">
 
-					<!-- Top Lyrics-->
-						<div class="row side1">
-							<div class="col-md-3"> 
-								<img src="images/icon_1.png" class="img-responsive img-size">
-							</div>
-							<div class="col-md-9 side1">
-								<h3><a href="#">Top Lyrics</a></h3>
-							</div>
-						</div>	
-						<hr>
-					<!-- New Lyrics-->
-						<div class="row side1">
-							<div class="col-md-3 img-container">
-								<img src="images/icon_2.png" class="img-responsive img-size">
-							</div>
-							<div class="col-md-9 side1">
-								<h3><a href="#">New Lyrics</a></h3>
-							</div>
-						</div>	
-						<hr>
-					<!-- yemi's corner-->
-						<div class="row side1">
-							<div class="col-md-1"></div>
-							<div class="col-md-3 img-container">
-								<img src="images/icon_3.png" class="img-responsive img-size">
-							</div>
-							<div class="col-md-6 side1 img-container">
-								<h3><a href="#">Yemi's Corner</a></h3>
-							</div>
-							<div class="col-md-2"></div>
-						</div>	
-						<!-- end here!-->
-
 						<div class="m_gerne">
 							<div class="h3_top">
-								<h3 class="h-3">Music Gernes</h3>
+								<h3 class="h-3">Music Genres</h3>
 							</div>
 							
 							<ol>
@@ -173,7 +140,7 @@
 								<li><a href="#">Hip Hop</a></li>
 								<hr>
 							</ol>
-							<p><a href="#" class="m-anc">Load more >>></a></p>
+							<p><a href="#" class="m-anc">load more >>> </a></p>
 						</div>
 						
 					</section>	
@@ -181,21 +148,24 @@
 					<!--Lower Section of the side bar-->
 					<section class="sideBar2">
 						<div class="container-fluid">
-							<div class="input-group ">
-						      	<input type="text" class="form-control searchTop" placeholder="search for any song lyrics..." name="">
-						      	<div class="input-group-btn">
-						        <button class="btn btn-top " type="submit"><i class="fa fa-search icon_top"></i></button>
-						      	</div>
-						    </div>
+							<form method="POST" action="search.php">
+								<div class="input-group ">
+							      	<input type="text" class="form-control searchTop" placeholder="search for any song lyrics..." name="searchBox">
+							      	<div class="input-group-btn">
+							        <button class="btn btn-top" name="searchBtn" type="submit"><i class="fa fa-search icon_top"></i></button>
+							      	</div>
+						    	</div>
+							</form>
+							
 
 						    <div class="social">
 						    	<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
+								  <a href="https://twitter.com/YemeeLyrics" class="social-icon"><i class="fa fa-twitter fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>
-								  <a href="" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
+								  <a href="https://www.facebook.com/YemeeLyrics/" class="social-icon"><i class="fa fa-facebook fa-stack-1x social-icon"></i></a>
 								</span>
 								<span class="fa-stack socialGrp">
 								  <i class="fa fa-circle fa-stack-2x social-circle"></i>

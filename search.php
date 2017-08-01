@@ -1,19 +1,10 @@
-<?php session_start();
+<?php 
+	
 	require 'config/config.php';
 
+/** Connecting to the database */
 	$db = new db(); 
 	$db = $db->connect(); 
-
-	$sql = 'SELECT * FROM blog_post ORDER BY id DESC LIMIT 1;';
-
-	$stmt = $db->prepare($sql);
-	
-	$stmt->execute();
-	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-
-	$db = null;
-
 
 
 ?> 
@@ -28,7 +19,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Title -->
-	<title>YemiLyrics | Home </title>
+	<title>YemiLyrics | search result </title>
 
 	<!-- link of the stylesheet for this project -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -40,7 +31,7 @@
 </head>
 
 <!-- BODY starts Here.... -->
-<body class="bg_home">
+<body class="jumbotron" style="margin-top: -48px;">
 
 	<div class="container-fluid">
 
@@ -64,10 +55,11 @@
 			        <div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li><a href="Top-lyrics.php">Top Lyrics</a></li>
-							<li><a href="sign-in.php">Contribute</a></li>
+							<li><a href="Contribute.php">Contribute</a></li>
 							<li><a href="Blog.php">Yemi's Corner</a></li>
 							<li><a href="sign-up.php">Sign up</a></li>
-							<li><a href="sign-in.php">Sign in</a></li>						
+
+							<li><a href="Sign-in.php">Sign in</a></li>						
 						</ul>
 					</div>
 				</nav>
@@ -75,30 +67,86 @@
 			</div>
 
 		</div>
+		</div>
 	<!-- Main Body Start HERE.... -->
 
-		<div class="container content" align="center">
-				<div class="Hd_text">
-					<h1 class="text big_L"><strong>WELCOME</strong></h1>
-					<h1 class="text small_L"><b>TO THE HOME OF LYRICS<b></h1>
-				</div>
-			<form method="post" action="search.php">
+			<div class="container">
 
-				<div class="input-group ">
+			
+					<form method="post" action="search.php">
+						<div class="input-group ">
+							<input type="text" class="form-control searchBox" style="background-color: transparent;" placeholder="search for any song lyrics..." name="searchBox">
+					      	<div class="input-group-btn">
+					        <button class="btn btn_srch" name="searchBtn" type="submit"><i class="fa fa-search icon_srch"></i></button>
+					      	</div>
+					    </div>
+					</form>
+
+					<?php 
+							if (isset($_POST['searchBtn'])) {
+							
+							$search =  $_POST['searchBox'];
+							$error_msg = "No Results Found....";
+
+							$sql = 'SELECT * FROM song_lyrics WHERE title_song LIKE "%$search%" OR artist LIKE "%$search%";';
+
+							$query = $db->prepare($sql);
+							
+							$query->execute();
+
+							$final = $query->fetchAll(PDO::FETCH_ASSOC);
+
+								echo "	<div>
+											<h2>Search Results <strong>".$search."</strong></h2>
+										</div>";
+
+								if ($final > 3) {
+									
+										foreach ($final as $row) {
+											
+											echo "
+												<div class='searchR'>
+													<h4>".$row['song_title']."</h4>
+													<h6>".$row['artist']."</h6>
+												</div>
+											 ";
+										}
+
+										
+										
+									}
+
+								else{
+
+									echo "
+												<div class='searchR'>
+													<h2>".$error_msg."</h2>
+												</div>
+											 ";
+								}
+							/*foreach ($final as $row) {
+							 
+							 
+										echo "
+												<div class='searchR'>
+													<h4>".$row['song_title']."</h4>
+													<h6>".$row['artist']."</h6>
+												</div>
+											 ";
+									}*/
+										
+								
+							
+							
+						}
+
+
+						$db = null;
+					?>
 					
-			      	<input type="text" class="form-control searchBox" placeholder="search for any song lyrics..." name="searchBox">
-			      	<div class="input-group-btn">
-			        <button class="btn btn_srch" name="searchBtn" type="submit"><i class="fa fa-search icon_srch"></i></button>
-			      	</div>
-			      	
-			    </div>
-
-			</form>
-
-
-
-		</div>
-	</div>
+					
+			</div>
+	
 	<!-- Lower Part of the Body Start HERE.... -->
 
 		<div class="pageBttm">
@@ -112,29 +160,11 @@
 					</div>
 					<div class="col-md-8 text-center">
 
-						<div class="row">
-							<div class="col-md-9">
-								<!-- Blog Post-->
-							<?php foreach ($result as $row) {?>
-								
-							
-								<h1 class="text text_bold no_pad-btm "><?= $row->post_title;?></h1>
-									<small class="readmore">written by <?= $row->post_creator;?></small>
-									<p>&nbsp;</p>
-								<p class="text text_light">	
-									
-									<?php echo substr($row->post_content, 0, 300); ?>....
-								
-									<br>
-									<a href="post.php?pid=<?= $row->id; ?>" class="readmore">Continue reading </a>
-								</p>
-									
-							</div>
-							<div class="col-md-3 pad_img">
-								<img src="<?= $row->post_img; ?>" class="img-responsive img-thumbnail" width="" height="500px">
-							</div>
-							<?php } ?>
-						</div>
+					<!-- Blog Post-->
+					
+					<p>&nbsp;</p>
+					
+
 
 					</div>
 					<div class="col-md-2">
@@ -159,7 +189,7 @@
 				
 
 
-			</div>
+			</div> 
 
 		</div>
 
